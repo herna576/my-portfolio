@@ -5,7 +5,41 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <button id="theme-toggle" type="button">Toggle theme</button>
     <h1>Hello, I'm Joshua Hernandez</h1>
     <p>This is my website. I play a lot of TFT.</p>
+
+    <script>
+  (function () {
+    const STORAGE_KEY = "theme";
+    const btn = document.getElementById("theme-toggle");
+
+    // 1) Determine initial theme:
+    // - use saved preference if present
+    // - otherwise use OS preference
+    const saved = localStorage.getItem(STORAGE_KEY);
+    const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const initialTheme = saved || (prefersDark ? "dark" : "light");
+
+    document.documentElement.setAttribute("data-theme", initialTheme);
+
+    // Optional: set button label
+    function updateLabel() {
+      const current = document.documentElement.getAttribute("data-theme");
+      btn.textContent = current === "dark" ? "Switch to light mode" : "Switch to dark mode";
+    }
+    updateLabel();
+
+    // 2) Toggle on click + save
+    btn.addEventListener("click", () => {
+      const current = document.documentElement.getAttribute("data-theme");
+      const next = current === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem(STORAGE_KEY, next);
+      updateLabel();
+    });
+  })();
+</script>
+
 </body>
 </html>

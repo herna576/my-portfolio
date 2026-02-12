@@ -1,9 +1,36 @@
+/* 1) Theme tokens (default = light) */
+:root {
+  --bg: #f4f4f4;
+  --text: #111;
+  --link: #0b57d0;
+  --card: #ffffff;
+  --border: #e5e5e5;
+}
+
+/* 2) Dark theme overrides */
+[data-theme="dark"] {
+  --bg: #0f1115;
+  --text: #e8e8e8;
+  --link: #8ab4f8;
+  --card: #151923;
+  --border: #2a2f3a;
+}
+
+/* 3) Use the tokens */
 body {
-    font-family: Arial, sans-serif;
-    margin: 40px;
-    background-color: #f4f4f4;
+  font-family: Arial, sans-serif;
+  margin: 40px;
+  background-color: var(--bg);
+  color: var(--text);
 }
 
 h1 {
-    color: darkblue;
+  color: var(--link);
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 16px;
+  border-radius: 12px;
 }
